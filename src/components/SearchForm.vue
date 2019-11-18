@@ -2,7 +2,7 @@
   <div class="searchWrap">
     <p class="searchTitle">{{searchTitle}}</p>
     <el-form :inline="true"
-             :model="queryParam">
+             :model="comData">
       <el-row :gutter="20">
         <el-col :lg="8"
                 :md="8"
@@ -13,7 +13,7 @@
           <el-form-item :label="item.title"
                         :label-width="pageConfig.labelWidth">
             <el-select v-if="item.type === 'select'"
-                       v-model="queryParam[item.key]"
+                       v-model="comData[item.key]"
                        :placeholder="`请选择${item.title}`"
                        clearable>
               <el-option value="-1"
@@ -24,17 +24,17 @@
                          :label="option.text"></el-option>
             </el-select>
             <el-date-picker v-else-if="item.type === 'date'"
-                            v-model="queryParam[item.key]"
+                            v-model="comData[item.key]"
                             type="date"
                             :placeholder="`请选择${item.title}`"></el-date-picker>
             <el-date-picker v-else-if="item.type === 'daterange'"
-                            v-model="queryParam[item.key]"
+                            v-model="comData[item.key]"
                             type="daterange"
                             range-separator="至"
                             start-placeholder="开始日期"
                             end-placeholder="结束日期"></el-date-picker>
             <el-input v-else
-                      v-model="queryParam[item.key]"
+                      v-model="comData[item.key]"
                       :placeholder="`请输入${item.title}`"></el-input>
           </el-form-item>
         </el-col>
@@ -66,9 +66,16 @@ export default {
       }
     }
   },
+  computed: {
+    comData: function () {
+      // return this.queryParam;
+      //如果希望点击提交之后再同步数据到父元素，需要组件内深拷贝数据
+      return JSON.parse(JSON.stringify(this.queryParam));
+    },
+  },
   methods: {
     search () {
-      this.$emit("getTableData", this.queryParam);
+      this.$emit("getTableData", this.comData);
     }
   }
 };
