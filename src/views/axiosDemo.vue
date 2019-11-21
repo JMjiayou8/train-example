@@ -14,7 +14,6 @@
             {{temp.album_title}}-{{temp.title}}-{{temp.author}}
           </li>
         </ul>
-
       </li>
     </ul>
   </div>
@@ -42,7 +41,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
 .music-list{
   .music-item{
     display: flex;

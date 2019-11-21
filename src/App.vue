@@ -21,7 +21,7 @@ html,
 div,
 p,
 ul,
-li {
+li,h1,h2,h3,h4,h5,h6 {
   margin: 0;
   padding: 0;
 }
@@ -38,5 +38,10 @@ li {
   font-size: 18px;
   font-weight: bold;
   margin: 20px 0;
+}
+a{
+  color: #333;
+  display: inline-block;
+  margin-bottom: 5px;
 }
 </style>

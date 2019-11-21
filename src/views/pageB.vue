@@ -4,7 +4,6 @@
     <compA :msg="msg"
            @getComAData="getComADataFunc"></compA>
     <p>显示子组件传递的值：{{comData}}</p>
-
   </div>
 </template>
 <script>

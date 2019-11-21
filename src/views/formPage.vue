@@ -6,19 +6,19 @@
              @submitData="submitFunc"></formCom>
     <p>点击提交获取绑定的form数据:<br>{{parseData1}}</p>
 
-    <p class="page-title">自定义表单组件--element-ui</p>
+    <!-- <p class="page-title">自定义表单组件--element-ui</p>
     <SearchForm :queryParam="pageQueryParam"
                 :config="pageQueryParamConfig"
                 @getTableData="changePage"
                 :searchTitle="'报文查询'"></SearchForm>
-    <p>绑定的form数据:<br>{{parseData2}}</p>
+    <p>绑定的form数据:<br>{{parseData2}}</p> -->
   </div>
 </template>
 <script>
 import formCom from '@/components/formCom'
-import SearchForm from "@/components/SearchForm";
+// import SearchForm from "@/components/SearchForm";
 export default {
-  components: { formCom, SearchForm },
+  components: { formCom },
   data () {
     return {
       formConfig: [
@@ -76,7 +76,7 @@ export default {
         checkedValue: [1]
       },
       pageQueryParam: {
-        demandCode: "",
+        demandCode: "3",
         demandName: "",
         demandDate: "",
         demandType: '',
