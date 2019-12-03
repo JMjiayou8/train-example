@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+      .box{
+        display: flex;
+      }
+      .box .box-title{
+        min-width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="box">
+        <h2 class="box-title">声明式渲染{{}}:</h2>
+        <div class="box-content">
+          <p>{{ message }}</p>
+          <p>{{ number + 1 }}</p>
+          <p>{{ ok ? 'YES' : 'NO' }}</p>
+          <p>js表达式：{{message.split('').reverse().join('') }}</p>
+          <p>computed计算属性：{{reversedMessage}}</p>
+        </div>
+      </div>
+      <div class="box">
+        <h2 class="box-title">指令：</h2>
+        <div class="box-content">
+          <div>
+              <h4>v-bind</h4>
+              <p><a v-bind:href="url">v-bind超链接</a></p>
+              <p><a :href="url">:缩写</a></p>
+          </div>
+          <div>
+              <h4>v-on</h4>
+              <p><button v-on:click="clickHandle">v-on绑定事件</button></p>
+              <p><button @click="clickHandle">@缩写</button></p>
+          </div> 
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello World!',
+          number: 1,
+          ok: true,
+          url: 'www.baidu.com'
+        },
+        methods:{
+          clickHandle:function(){
+            alert('123')
+          }
+        },
+        computed:{
+          reversedMessage:function(){
+            return this.message.split('').reverse().join('')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import '@/assets/style/index.scss'
 export default {
   name: 'app',
 }

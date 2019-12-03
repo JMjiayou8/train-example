@@ -2,7 +2,8 @@
   <div class="searchWrap">
     <p class="searchTitle">{{searchTitle}}</p>
     <el-form :inline="true"
-             :model="comData">
+             :model="queryData"
+             size="mini">
       <el-row :gutter="20">
         <el-col :lg="8"
                 :md="8"
@@ -13,28 +14,30 @@
           <el-form-item :label="item.title"
                         :label-width="pageConfig.labelWidth">
             <el-select v-if="item.type === 'select'"
-                       v-model="comData[item.key]"
+                       v-model="queryData[item.key]"
                        :placeholder="`请选择${item.title}`"
                        clearable>
               <el-option value="-1"
                          :label="`请选择${item.title}`"></el-option>
-              <el-option v-for="option in item.options"
-                         :key="option.value"
-                         :value="option.value"
-                         :label="option.text"></el-option>
+              <el-option v-for="option in selectOption[item.cKey]"
+                         :key="option.PARAM_VALUE"
+                         :value="option.PARAM_VALUE"
+                         :label="option.PARAM_NAME"></el-option>
             </el-select>
             <el-date-picker v-else-if="item.type === 'date'"
-                            v-model="comData[item.key]"
+                            v-model="queryData[item.key]"
                             type="date"
-                            :placeholder="`请选择${item.title}`"></el-date-picker>
+                            :placeholder="`请选择${item.title}`">
+            </el-date-picker>
             <el-date-picker v-else-if="item.type === 'daterange'"
-                            v-model="comData[item.key]"
+                            v-model="queryData[item.key]"
                             type="daterange"
                             range-separator="至"
                             start-placeholder="开始日期"
-                            end-placeholder="结束日期"></el-date-picker>
+                            end-placeholder="结束日期">
+            </el-date-picker>
             <el-input v-else
-                      v-model="comData[item.key]"
+                      v-model="queryData[item.key]"
                       :placeholder="`请输入${item.title}`"></el-input>
           </el-form-item>
         </el-col>
@@ -57,6 +60,7 @@ export default {
     queryParam: Object,
     config: Array,
     searchTitle: String,
+    selectOption: Object,
     pageConfig: {
       type: Object,
       default: () => {
@@ -66,16 +70,17 @@ export default {
       }
     }
   },
-  computed: {
-    comData: function () {
-      // return this.queryParam;
-      //如果希望点击提交之后再同步数据到父元素，需要组件内深拷贝数据
-      return JSON.parse(JSON.stringify(this.queryParam));
-    },
+
+  computed:{
+    queryData:function(){
+      console.log(JSON.parse(JSON.stringify(this.queryParam)))
+      return this.queryParam;
+      // return JSON.parse(JSON.stringify(this.queryParam))
+    }
   },
   methods: {
     search () {
-      this.$emit("getTableData", this.comData);
+      this.$emit("getTableData", this.queryData);
     }
   }
 };
