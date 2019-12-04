@@ -2,7 +2,7 @@
   <div class="searchWrap">
     <p class="searchTitle">{{searchTitle}}</p>
     <el-form :inline="true"
-             :model="queryData"
+             :model="queryParam"
              size="mini">
       <el-row :gutter="20">
         <el-col :lg="8"
@@ -14,7 +14,7 @@
           <el-form-item :label="item.title"
                         :label-width="pageConfig.labelWidth">
             <el-select v-if="item.type === 'select'"
-                       v-model="queryData[item.key]"
+                       v-model="queryParam[item.key]"
                        :placeholder="`请选择${item.title}`"
                        clearable>
               <el-option value="-1"
@@ -25,19 +25,19 @@
                          :label="option.PARAM_NAME"></el-option>
             </el-select>
             <el-date-picker v-else-if="item.type === 'date'"
-                            v-model="queryData[item.key]"
+                            v-model="queryParam[item.key]"
                             type="date"
                             :placeholder="`请选择${item.title}`">
             </el-date-picker>
             <el-date-picker v-else-if="item.type === 'daterange'"
-                            v-model="queryData[item.key]"
+                            v-model="queryParam[item.key]"
                             type="daterange"
                             range-separator="至"
                             start-placeholder="开始日期"
                             end-placeholder="结束日期">
             </el-date-picker>
             <el-input v-else
-                      v-model="queryData[item.key]"
+                      v-model="queryParam[item.key]"
                       :placeholder="`请输入${item.title}`"></el-input>
           </el-form-item>
         </el-col>
@@ -70,17 +70,9 @@ export default {
       }
     }
   },
-
-  computed:{
-    queryData:function(){
-      console.log(JSON.parse(JSON.stringify(this.queryParam)))
-      return this.queryParam;
-      // return JSON.parse(JSON.stringify(this.queryParam))
-    }
-  },
   methods: {
     search () {
-      this.$emit("getTableData", this.queryData);
+      this.$emit("getTableData", this.queryParam);
     }
   }
 };

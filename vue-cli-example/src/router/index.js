@@ -33,14 +33,17 @@ const routes = [
     path: '/vuexPage',
     name: 'vuexPage',
     component: () => import('@/views/vuexPage.vue')
-
   },
   {
     path: '/elementPage',
     name: 'elementPage',
     component: () => import('@/views/elementPage.vue')
-
-  }
+  },
+  {
+    path: '/echartsPage',
+    name: 'echartsPage',
+    component: () => import('@/views/echartsPage.vue')
+  },
 ]
 
 // eslint-disable-next-line no-new

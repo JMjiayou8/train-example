@@ -9,10 +9,10 @@
       [v-cloak] {
         display: none;
       }
-      .box{
+      .box {
         display: flex;
       }
-      .box .box-title{
+      .box .box-title {
         min-width: 200px;
       }
     </style>
@@ -33,15 +33,25 @@
         <h2 class="box-title">指令：</h2>
         <div class="box-content">
           <div>
-              <h4>v-bind</h4>
-              <p><a v-bind:href="url">v-bind超链接</a></p>
-              <p><a :href="url">:缩写</a></p>
+            <h4>v-bind</h4>
+            <p><a v-bind:href="url">v-bind超链接</a></p>
+            <p><a :href="url">:缩写</a></p>
           </div>
           <div>
-              <h4>v-on</h4>
-              <p><button v-on:click="clickHandle">v-on绑定事件</button></p>
-              <p><button @click="clickHandle">@缩写</button></p>
-          </div> 
+            <h4>v-on</h4>
+            <p><button v-on:click="clickHandle">v-on绑定事件</button></p>
+            <p><button @click="clickHandle">@缩写</button></p>
+          </div>
+          <div>
+            <h4>v-for</h4>
+            <div v-for="item in items" :key="item.id">
+              {{  item.text }}
+            </div>
+          </div>
+          <div>
+              <h4>v-model</h4>
+              <input v-model="inputText"/>
+            </div>
         </div>
       </div>
     </div>
@@ -53,17 +63,40 @@
           message: 'Hello World!',
           number: 1,
           ok: true,
-          url: 'www.baidu.com'
+          url: 'www.baidu.com',
+          items: [
+            { id: 1, text: 'text1' },
+            { id: 2, text: 'text2' },
+            { id: 3, text: 'text3' }
+          ],
+          inputText:'default'
         },
-        methods:{
-          clickHandle:function(){
+        methods: {
+          clickHandle: function() {
             alert('123')
           }
         },
-        computed:{
-          reversedMessage:function(){
-            return this.message.split('').reverse().join('')
+        computed: {
+          reversedMessage: function() {
+            return this.message
+              .split('')
+              .reverse()
+              .join('')
           }
+        },
+        created(){
+          console.log('======created=====')
+          console.log('data==',this.$data)
+          console.log('el==',this.$el)
+        },
+        mounted(){
+          console.log('======mounted=====')
+          console.log('data==',this.$data)
+          console.log('el==',this.$el)
+        },
+        beforeDestroy(){
+          console.log('======beforeDestroy=====')
+          console.log(this)
         }
       })
     </script>

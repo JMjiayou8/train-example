@@ -35,6 +35,9 @@
         <li>
           <router-link to="/elementPage">引入element-ui</router-link>
         </li>
+        <li>
+          <router-link to="/echartsPage">绘制echarts图表</router-link>
+        </li>
       </ul>
     </div>
   </div>
